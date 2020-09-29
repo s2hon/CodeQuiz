@@ -25,11 +25,21 @@
                         <br> You will loose 5 seconds for each incorrect.
                         <br> You will gain 5 seconds for each right answer.
                         <br> Good Luck </h3>
+                        <button type="button" class="btn btn-success" id="startButton">click here to start</button>
                 </div>
-                <div class="row" id="answer">
-                    <button type="button" class="btn btn-success">click here to start</button>
-                </div>
+                <div class="row" id="choices"></div>
                 <div class="row" id="results"></div>
+
+                <div id="gameOver" style="display:none;">
+                    <h3 class="alert alert-success">Good Job!</h3>
+                    <h5 class="gameOver">Your score:
+                        <span id=finalTime></span>
+                    </h5>
+                    <h5 class="gameOver">Enter Nickname:
+                        <input id="userName" type="text" class="gameOver">
+                        <button id="userInfo" class="btn btn-success">submit</button>
+                    </h5>
+                </div>
             </div>
             
             <div class="col-lg-2" id="right">
