@@ -47,6 +47,7 @@ h1 {
     top: 30px;
     font-size: larger;
     font-weight: 800;
+    margin-bottom: 30px;
 }
 
 #answer {
@@ -61,7 +62,6 @@ h1 {
 button {
     vertical-align: middle;
     text-align: center;
-    float: center;
     margin: auto;
     display: inline-block;
     

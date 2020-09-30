@@ -56,7 +56,6 @@ var queSet = [
 //declared variables
 var secondsLeft = 60;
 var thisRoundIndex = 0;
-var endTime = secondsLeft;
 
 const questions = document.getElementById ("question");
 const choices = document.getElementById ("choices");
@@ -71,23 +70,27 @@ var currentSeconds = parseInt(time.textContent);
 
 var correctAnswer = queSet[thisRoundIndex].correctAnswer;
 
+var finalScore = [];
+
 
 //start quiz Add Event Listener
 buttonStart.addEventListener("click", startTimer)
 function startTimer (event) {
-        var finalTime = setInterval(function() {
-            secondsLeft--;
-            time.textContent = secondsLeft;
-            if (secondsLeft <= 0) {
-                // quiz finish
-                clearInterval(finalTime);
-                time.textContent = "Time's Up!";
-                donePage();
-                console.log(endTime);
-            }
-        }, 1000);
-        mainQuiz();
+    clock;
+    mainQuiz();
 };
+
+var clock = setInterval(function() {
+    secondsLeft--;
+    time.textContent = secondsLeft;
+    if (secondsLeft <= 0) {
+        // quiz finish
+        finalScore.push() = secondsLeft;
+        clearInterval(clock);
+        time.textContent = "Time's Up!";
+        donePage();
+    }
+},1000);
 
 function mainQuiz() {
     questions.innerHTML="";
@@ -100,12 +103,15 @@ function mainQuiz() {
     questions.textContent = userQuestion;
 
     for (i=0; i<userChoices.length; i++) {
+        var buttonShell = document.createElement("div");
+            buttonShell.setAttribute ("class", "clearfix");
         var liButton = document.createElement("button");
             liButton.textContent = queSet[thisRoundIndex].answer[i];
             liButton.setAttribute ("class", "btn btn-success");
             liButton.setAttribute ("data-index", i);
-            liButton.addEventListener('click', userAnswer)
-            choices.appendChild(liButton);
+            liButton.addEventListener('click', userAnswer);
+            choices.appendChild (buttonShell);
+            buttonShell.appendChild(liButton);
             choices.appendChild(document.createElement("BR"));
     };
 
@@ -126,24 +132,23 @@ function mainQuiz() {
         thisRoundIndex++;
 
         if (thisRoundIndex >= queSet.length) {
-            clearInterval(finalTime);
+            clearInterval(clock);
+            finalScore.push() = secondsLeft;
             time.textContent = "You're done!";
             donePage();
-            console.log(endTime);
         }
         setTimeout(mainQuiz,750);
     }
 };
 
 function donePage() {
-    clearInterval(finalTime);
+    clearTimeout();
+    finalTime.textContent = finalScore;
+    time.textContent = "You're done!";
     questions.innerHTML="";
     choices.innerHTML="";
     results.innerHTML="";
     gameOver.setAttribute ("style", "display:block");
-
-    console.log(endTime);
-
 };
 
 // scoreBoard.addEventListener("click", recordScores)
