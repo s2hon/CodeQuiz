@@ -65,28 +65,19 @@ const time = document.getElementById ("time");
 const buttonStart = document.getElementById ("startButton");
 const gameOver = document.getElementById ("gameOver");
 const finalTime = document.getElementById("finalTime");
-const view = document.getElementById ("view");
-const startOver = document.getElementById ("backButton");
-const scoreChart = document.getElementById ("scoreChart");
-
- 
 
 //button
 var userInfo = document.getElementById ("userInfo");
 //input
-var name = document.getElementById ("userName")
 var currentSeconds = parseInt(time.textContent);
 var correctAnswer = queSet[thisRoundIndex].correctAnswer;
-var finalScore = [];
-var initials = ["hello"];
+var finalScore = "";
 var finalInfo = 0;
 
 
 //event listeners
-view.addEventListener("click", recordScores);
+//start quiz
 buttonStart.addEventListener("click", startTimer);
-userInfo.addEventListener("click", recordScores);
-startOver.addEventListener("click", startTimer);
 
 //start quiz Add Event Listener
 function startTimer (event) {
@@ -98,7 +89,7 @@ function startTimer (event) {
             finalScore=secondsLeft;
             clearInterval(clock);
             time.textContent = "Time's Up!";
-            showSB();
+            window.location.href = "./scoreBoard.html";
         }
     },1000);
     mainQuiz();
@@ -149,7 +140,7 @@ function mainQuiz() {
         //last answer finishes quiz
         if (thisRoundIndex >= queSet.length) {
             clearInterval(clock);
-            finalScore.push(secondsLeft);
+            secondsLeft;
             donePage();
         } 
         else {
@@ -164,43 +155,28 @@ function donePage() {
     choices.innerHTML="";
     results.innerHTML="";
     gameOver.setAttribute ("style", "display:block");
-    finalTime.textContent = finalScore;
+    finalTime.textContent = secondsLeft;
     time.textContent = "You're done!";
+
+    userInfo.addEventListener("click", recordScores);
     
 };
 
 //scoreboard prompt
-function recordScores(event) {
-    event.preventDefault();
-    var user = userInfo.value.trim();
-    initials.push(user);
-    if (initials === null){
-        console.log("No value entered!");
-    }
-    else {
-        finalInfo++;
-        initials;
-        finalScore;
+function recordScores() {
+    var name = document.getElementById ("userName").value;
+    var userIn = name.trim();
+    if (userIn !== ""){
+        var newScores = JSON.parse(window.localStorage.getItem("highscores")) || [];;
+        var newUser = {
+            score: secondsLeft,
+            initials: userIn
+          };
+        newScores.push(newUser);
+        window.localStorage.setItem("newScores", JSON.stringify(newScores));
+        window.location.href = "./scoreBoard.html";   
         };
-    
-    questions.innerHTML="";
-    choices.innerHTML="";
-    results.innerHTML="";
-    gameOver.setAttribute ("style", "display:none");
-
-    scoreBoard.setAttribute ("style", "display:block");
-    
-    for (i=0; i<finalInfo; i++){
-        index = finalInfo - 1;
-        var row = scoreChart.insertRow(index);
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
-        cell1.innerHTML = initials [index];
-        cell2.innerHTML = finalScore [index];
-    }
-
 };
-
 
 
     

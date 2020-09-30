@@ -15,47 +15,38 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3" id="left">
-                <a href="./scoreBoard.html"><button class="btn btn-outline-primary">view Highscores</button></a>
+                <button id="view" class="btn btn-outline-primary">view Highscores</button>
             </div>
 
             <div class="col-lg-7" id="main">
                 <div class="row" id="question">
-                    <h4>
-                        <strong style="font-size: larger;">JavaScript Knowledge Check</strong>
-                        <br>Answer the following questions. 
-                        <br> You will <span>loose 5 seconds</span> for each incorrect.
-                        <br> You will <span>gain 2 seconds</span> for each right answer.
-                        <br> Good Luck 
-                        <br> <button type="button" class="btn btn-success clear" id="startButton">click here to start</button>
-                    </h4>
-                        
-                       
-                </div>
-                <div class="col-lg-12" class="row">
-                    <div id="choices"></div>
-                </div>
-                <div class="row" id="results"></div>
+                    <h3>Score Board</h3>
+                    <h5 class="highScoreInfo"></h5>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Initials</th>
+                                <th scope="col">Score</th>
+                            </tr>
+                        </thead>
+                        <tbody id="scoreChart">
 
-                <div id="gameOver" style="display:none;">
-                    <h3 class="alert alert-success">Good Job!</h3>
-                    <h5>Your score:
-                        <h5 id=finalTime></h5>
-                    </h5>
-                    <h5>Enter Nickname:
-                        <input id="userName" type="text">
-                        <button id="userInfo" class="btn btn-success">submit</button>
-                    </h5>
+                        </tbody>
+                    </table>
+                    <a href="./index.html"><button id="backButton" class="btn btn-success">Play Again</button></a>
+                    <button id="clear" class="btn btn-danger">Clear Scores</button> 
                 </div>
             </div>
             
             <div class="col-lg-2" id="right">
                 <div class="alert alert-danger">
-                    Time <p id="time">10</p>
+                    Time <p id="time">Time's Up!</p>
                 </div>
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
+    <script src="scoreBoard.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
