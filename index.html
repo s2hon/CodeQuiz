@@ -15,7 +15,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3" id="left">
-                <a href="javascript:recordScores()">view Highscores</a>
+                <button id="view" class="btn btn-outline-primary">view Highscores</button>
             </div>
 
             <div class="col-lg-7" id="main">
@@ -35,7 +35,7 @@
                 <div id="gameOver" style="display:none;">
                     <h3 class="alert alert-success">Good Job!</h3>
                     <h5 class="gameOver">Your score:
-                        <span id=finalTime></span>
+                        <h5 id=finalTime></h5>
                     </h5>
                     <h5 class="gameOver">Enter Nickname:
                         <input id="userName" type="text" class="gameOver">
@@ -43,11 +43,11 @@
                     </h5>
                 </div>
 
-                <div class="scoreBoard" style="display:none;">
+                <div id="scoreBoard" style="display:none;">
                     <h3>Score Board</h3>
                     <h5 class="highScoreInfo"></h5>
-                    <button id="backButton">Go Back</button>
-                    <button id="clear">Clear Scores</button>
+                    <button id="backButton" class="btn btn-success">Go Back</button>
+                    <button id="clear" class="btn btn-danger">Clear Scores</button>
                 </div>
 
             </div>

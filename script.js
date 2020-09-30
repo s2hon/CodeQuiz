@@ -54,8 +54,9 @@ var queSet = [
     ]
 
 //declared variables
-var secondsLeft = 60;
+var secondsLeft = 3;
 var thisRoundIndex = 0;
+var clock;
 
 const questions = document.getElementById ("question");
 const choices = document.getElementById ("choices");
@@ -63,35 +64,37 @@ const results = document.getElementById ("results");
 const time = document.getElementById ("time");
 const buttonStart = document.getElementById ("startButton");
 const gameOver = document.getElementById ("gameOver");
-const scoreBoard = document.querySelector ("scoreBoard");
-const finalTime = document.querySelector("finalTime");
+const finalTime = document.getElementById("finalTime");
+const userInfo = document.getElementById ("userInfo");
+const view = document.getElementById ("view");
 
 var currentSeconds = parseInt(time.textContent);
 
 var correctAnswer = queSet[thisRoundIndex].correctAnswer;
 
-var finalScore = [];
+var finalScore = "";
 
+//scoreboard button
+view.addEventListener("click", recordScores);
 
 //start quiz Add Event Listener
 buttonStart.addEventListener("click", startTimer)
 function startTimer (event) {
-    clock;
+    clock = setInterval(function() {
+        secondsLeft--;
+        time.textContent = secondsLeft;
+        if (secondsLeft <= 0) {
+            // quiz finish
+            finalScore=secondsLeft;
+            clearInterval(clock);
+            time.textContent = "Time's Up!";
+            recordScores();
+        }
+    },1000);
     mainQuiz();
 };
 
-var clock = setInterval(function() {
-    secondsLeft--;
-    time.textContent = secondsLeft;
-    if (secondsLeft <= 0) {
-        // quiz finish
-        finalScore.push() = secondsLeft;
-        clearInterval(clock);
-        time.textContent = "Time's Up!";
-        donePage();
-    }
-},1000);
-
+//running main quiz
 function mainQuiz() {
     questions.innerHTML="";
     choices.innerHTML="";
@@ -102,6 +105,7 @@ function mainQuiz() {
     var correctAns = queSet[thisRoundIndex].correctAnswer;
     questions.textContent = userQuestion;
 
+    //calling choices
     for (i=0; i<userChoices.length; i++) {
         var buttonShell = document.createElement("div");
             buttonShell.setAttribute ("class", "clearfix");
@@ -115,6 +119,7 @@ function mainQuiz() {
             choices.appendChild(document.createElement("BR"));
     };
 
+    //checking answer
     function userAnswer (event) {
         if (parseInt(this.dataset.index) === correctAns){
             secondsLeft = secondsLeft + 5;
@@ -130,34 +135,35 @@ function mainQuiz() {
             time.textContent = secondsLeft;
         }
         thisRoundIndex++;
-
+    
+        //last answer finishes quiz
         if (thisRoundIndex >= queSet.length) {
             clearInterval(clock);
-            finalScore.push() = secondsLeft;
-            time.textContent = "You're done!";
+            finalScore=secondsLeft;
             donePage();
         }
-        setTimeout(mainQuiz,750);
+        setTimeout(mainQuiz,500);
     }
 };
 
+//finished prompt
 function donePage() {
-    clearTimeout();
-    finalTime.textContent = finalScore;
-    time.textContent = "You're done!";
     questions.innerHTML="";
     choices.innerHTML="";
     results.innerHTML="";
     gameOver.setAttribute ("style", "display:block");
+    finalTime.textContent = finalScore;
+    time.textContent = "You're done!";
+    userInfo.addEventListener("click", recordScores)
 };
 
-// scoreBoard.addEventListener("click", recordScores)
-
-// function recordScores() {
-//     questions.innerHTML="";
-//     choices.innerHTML="";
-//     results.innerHTML="";
-// };
+//scoreboard prompt
+function recordScores() {
+    questions.innerHTML="";
+    choices.innerHTML="";
+    results.innerHTML="";
+    scoreBoard.setAttribute ("style", "display:block");
+};
 
 
         
