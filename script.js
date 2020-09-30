@@ -141,6 +141,7 @@ function donePage() {
     choices.innerHTML="";
     results.innerHTML="";
     gameOver.setAttribute ("style", "display:block");
+
     console.log(endTime);
 
 };
@@ -152,11 +153,6 @@ function donePage() {
 //     choices.innerHTML="";
 //     results.innerHTML="";
 // };
-
-    
-    var createP2 = document.createElement("p");
-    clearInterval(holdInterval);
-    createP.textContent = "Your final score is: " + timeRemaining;
 
 
         
