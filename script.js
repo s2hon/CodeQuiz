@@ -54,8 +54,9 @@ var queSet = [
     ]
 
 //declared variables
-var secondsLeft = 60;
+var secondsLeft = 3;
 var thisRoundIndex = 0;
+var clock;
 
 const questions = document.getElementById ("question");
 const choices = document.getElementById ("choices");
@@ -63,7 +64,7 @@ const results = document.getElementById ("results");
 const time = document.getElementById ("time");
 const buttonStart = document.getElementById ("startButton");
 const gameOver = document.getElementById ("gameOver");
-const scoreBoard = document.querySelector ("scoreBoard");
+const scoreBoard = document.getElementById ("scoreBoard");
 const finalTime = document.querySelector("finalTime");
 
 var currentSeconds = parseInt(time.textContent);
@@ -76,21 +77,21 @@ var finalScore = [];
 //start quiz Add Event Listener
 buttonStart.addEventListener("click", startTimer)
 function startTimer (event) {
-    clock;
+    clock = setInterval(function() {
+        secondsLeft--;
+        time.textContent = secondsLeft;
+        if (secondsLeft <= 0) {
+            // quiz finish
+            finalScore.push(secondsLeft);
+            clearInterval(clock);
+            time.textContent = "Time's Up!";
+            recordScores();
+        }
+    },1000);
     mainQuiz();
 };
 
-var clock = setInterval(function() {
-    secondsLeft--;
-    time.textContent = secondsLeft;
-    if (secondsLeft <= 0) {
-        // quiz finish
-        finalScore.push() = secondsLeft;
-        clearInterval(clock);
-        time.textContent = "Time's Up!";
-        donePage();
-    }
-},1000);
+
 
 function mainQuiz() {
     questions.innerHTML="";
@@ -133,7 +134,8 @@ function mainQuiz() {
 
         if (thisRoundIndex >= queSet.length) {
             clearInterval(clock);
-            finalScore.push() = secondsLeft;
+            finalScore.push(secondsLeft);
+            console.log(finalScore);
             time.textContent = "You're done!";
             donePage();
         }
@@ -142,22 +144,22 @@ function mainQuiz() {
 };
 
 function donePage() {
-    clearTimeout();
-    finalTime.textContent = finalScore;
-    time.textContent = "You're done!";
     questions.innerHTML="";
     choices.innerHTML="";
     results.innerHTML="";
     gameOver.setAttribute ("style", "display:block");
+    finalTime.textContent = (finalScore.toString());
+    time.textContent = "You're done!";
 };
 
 // scoreBoard.addEventListener("click", recordScores)
 
-// function recordScores() {
-//     questions.innerHTML="";
-//     choices.innerHTML="";
-//     results.innerHTML="";
-// };
+function recordScores() {
+    questions.innerHTML="";
+    choices.innerHTML="";
+    results.innerHTML="";
+    scoreBoard.setAttribute ("style", "display:block");
+};
 
 
         
