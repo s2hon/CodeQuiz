@@ -15,6 +15,7 @@
     width: 60%;
     margin: auto;
     top: 50px;
+    max-height: auto;
 }
 
 #left {
@@ -54,6 +55,7 @@ h1 {
     float: center;
     margin: auto;
     top: 30px;
+    max-height: auto;
 }
 
 button {
@@ -62,5 +64,9 @@ button {
     float: center;
     margin: auto;
     
+}
+
+#results {
+    opacity: 60%;
 }
 
