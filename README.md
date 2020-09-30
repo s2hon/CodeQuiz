@@ -29,5 +29,8 @@ One of my biggest challenges was to figure out how to transfer the information t
 I feel much more confident in my JavaScript skills compared to last week. I feel that it will get easier everyday but I have a long way to go to master JavaScript.
 I will countinue on my JavaScript (and now jQuery!) journey this week.
 
+Git Hub: https://github.com/s2hon/CodeQuiz-hw4
+Live Website: https://s2hon.github.io/CodeQuiz-hw4/
+
 
 ![code quiz](screenshot.gif)
