@@ -68,10 +68,9 @@ const finalTime = document.getElementById("finalTime");
 const userInfo = document.getElementById ("userInfo");
 const view = document.getElementById ("view");
 
+var name = document.getElementById ("userName")
 var currentSeconds = parseInt(time.textContent);
-
 var correctAnswer = queSet[thisRoundIndex].correctAnswer;
-
 var finalScore = "";
 
 //scoreboard button
@@ -126,7 +125,7 @@ function mainQuiz() {
             results.textContent = "Correct!";
             time.textContent = secondsLeft;
         }
-        if (parseInt(this.dataset.index) !== correctAns){
+        else if (parseInt(this.dataset.index) !== correctAns){
             secondsLeft = secondsLeft - 5;
             results.textContent = "Incorrect!";
             var showCorrectAns = document.createElement ("p")
@@ -141,8 +140,10 @@ function mainQuiz() {
             clearInterval(clock);
             finalScore=secondsLeft;
             donePage();
+        } 
+        else {
+            setTimeout(mainQuiz,500);
         }
-        setTimeout(mainQuiz,500);
     }
 };
 
@@ -154,11 +155,17 @@ function donePage() {
     gameOver.setAttribute ("style", "display:block");
     finalTime.textContent = finalScore;
     time.textContent = "You're done!";
-    userInfo.addEventListener("click", recordScores)
+    
+    name.addEventListener("keydown", recordScores)
 };
 
 //scoreboard prompt
-function recordScores() {
+function recordScores(event) {
+    if (event.key === "Enter"){
+        event.preventDefault();
+        var newDo = name.value;
+    console.log(newDo);
+    }
     questions.innerHTML="";
     choices.innerHTML="";
     results.innerHTML="";
