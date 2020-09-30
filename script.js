@@ -23,13 +23,13 @@ var queSet = [
     },
     {
         question: "How many looping statements are there in JavaScript?",
-        answer: ["1: for loop", "2: for loop, while loop", "3: for loop, while loop, do...while loop", "4: for loop, while loop, do...while loop", "do...until loop"],
+        answer: ["1: for, do...until, for...of", "2: for, while, do...until,for...in", "3: for loop, while loop, do...while, for...in, for...of", "4: for, while, do...while, for...in, do...until"],
         correctAnswer: 2
     },
     {
-        question: "How can you add a comment in a JavaScript?",
+        question: "How can you add single line comment in a JavaScript?",
         answer: ["//comment", "<!--comment-->", "/*comment", "'comment"],
-        correctAnswer: 3
+        correctAnswer: 0
     },
     {
         question: "How does a \"for\" loop start for var x?",
@@ -56,16 +56,18 @@ var queSet = [
 //declared variables
 var secondsLeft = 60;
 var thisRoundIndex = 0;
+var endTime = secondsLeft;
 
 const questions = document.getElementById ("question");
 const choices = document.getElementById ("choices");
 const results = document.getElementById ("results");
 const time = document.getElementById ("time");
 const buttonStart = document.getElementById ("startButton");
+const gameOver = document.getElementById ("gameOver");
+const scoreBoard = document.querySelector ("scoreBoard");
+const finalTime = document.querySelector("finalTime");
 
 var currentSeconds = parseInt(time.textContent);
-var fiveSec = 5;
-var holdTime = 0;
 
 var correctAnswer = queSet[thisRoundIndex].correctAnswer;
 
@@ -73,60 +75,88 @@ var correctAnswer = queSet[thisRoundIndex].correctAnswer;
 //start quiz Add Event Listener
 buttonStart.addEventListener("click", startTimer)
 function startTimer (event) {
-        setInterval(function() {
+        var finalTime = setInterval(function() {
             secondsLeft--;
             time.textContent = secondsLeft;
-
             if (secondsLeft <= 0) {
                 // quiz finish
-                clearInterval(secondsLeft);
-                allDone();
+                clearInterval(finalTime);
                 time.textContent = "Time's Up!";
+                donePage();
+                console.log(endTime);
             }
         }, 1000);
-    mainQuiz();
+        mainQuiz();
 };
 
 function mainQuiz() {
     questions.innerHTML="";
     choices.innerHTML="";
     results.innerHTML="";
+
     var userQuestion = queSet[thisRoundIndex].question;
     var userChoices = queSet[thisRoundIndex].answer;
+    var correctAns = queSet[thisRoundIndex].correctAnswer;
     questions.textContent = userQuestion;
-    
 
     for (i=0; i<userChoices.length; i++) {
-            var liButton = document.createElement("button");
-
+        var liButton = document.createElement("button");
             liButton.textContent = queSet[thisRoundIndex].answer[i];
             liButton.setAttribute ("class", "btn btn-success");
             liButton.setAttribute ("data-index", i);
             liButton.addEventListener('click', userAnswer)
             choices.appendChild(liButton);
+            choices.appendChild(document.createElement("BR"));
     };
 
     function userAnswer (event) {
-        if (parseInt(this.dataset.index) === parseInt(correctAnswer)){
+        if (parseInt(this.dataset.index) === correctAns){
             secondsLeft = secondsLeft + 5;
             results.textContent = "Correct!";
             time.textContent = secondsLeft;
         }
-        if (parseInt(this.dataset.index) !== parseInt(correctAnswer)){
+        if (parseInt(this.dataset.index) !== correctAns){
             secondsLeft = secondsLeft - 5;
             results.textContent = "Incorrect!";
+            var showCorrectAns = document.createElement ("p")
+            showCorrectAns.textContent = "The correct answer is " + userChoices[correctAns] + ".";
+            results.appendChild(showCorrectAns);
             time.textContent = secondsLeft;
         }
         thisRoundIndex++;
-        setTimeout(mainQuiz,750)
-}
 
+        if (thisRoundIndex >= queSet.length) {
+            clearInterval(finalTime);
+            time.textContent = "You're done!";
+            donePage();
+            console.log(endTime);
+        }
+        setTimeout(mainQuiz,750);
+    }
+};
+
+function donePage() {
+    clearInterval(finalTime);
+    questions.innerHTML="";
+    choices.innerHTML="";
+    results.innerHTML="";
+    gameOver.setAttribute ("style", "display:block");
+    console.log(endTime);
 
 };
 
+// scoreBoard.addEventListener("click", recordScores)
 
+// function recordScores() {
+//     questions.innerHTML="";
+//     choices.innerHTML="";
+//     results.innerHTML="";
+// };
 
-
+    
+    var createP2 = document.createElement("p");
+    clearInterval(holdInterval);
+    createP.textContent = "Your final score is: " + timeRemaining;
 
 
         

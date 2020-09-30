@@ -15,16 +15,16 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3" id="left">
-                <a href="#" id="highscores" class="alert alert-success">view Highscores</a>
+                <a href="javascript:recordScores()">view Highscores</a>
             </div>
 
             <div class="col-lg-7" id="main">
                 <div class="row" id="question">
                     <h1>Coding Quiz Challenge</h1>
-                    <h3>Answer the following questions in less than 60 seconds. 
-                        <br> You will loose 5 seconds for each incorrect.
-                        <br> You will gain 5 seconds for each right answer.
-                        <br> Good Luck </h3>
+                    <h4>Answer the following questions in less than 60 seconds. 
+                        <br> You will <span>loose 5 seconds</span> for each incorrect.
+                        <br> You will <span>gain 5 seconds</span> for each right answer.
+                        <br> Good Luck </h4>
                         <button type="button" class="btn btn-success" id="startButton">click here to start</button>
                 </div>
                 <div class="row" id="choices"></div>
@@ -40,6 +40,14 @@
                         <button id="userInfo" class="btn btn-success">submit</button>
                     </h5>
                 </div>
+
+                <div class="scoreBoard" style="display:none;">
+                    <h3>Score Board</h3>
+                    <h5 class="highScoreInfo"></h5>
+                    <button id="backButton">Go Back</button>
+                    <button id="clear">Clear Scores</button>
+                </div>
+
             </div>
             
             <div class="col-lg-2" id="right">
