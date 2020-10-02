@@ -71,8 +71,7 @@ var userInfo = document.getElementById ("userInfo");
 //input
 var currentSeconds = parseInt(time.textContent);
 var correctAnswer = queSet[thisRoundIndex].correctAnswer;
-var finalScore = "";
-var finalInfo = 0;
+var finalScore = [];
 
 
 //event listeners
@@ -167,13 +166,13 @@ function recordScores() {
     var name = document.getElementById ("userName").value;
     var userIn = name.trim();
     if (userIn !== ""){
-        var newScores = JSON.parse(window.localStorage.getItem("highscores")) || [];;
         var newUser = {
             score: secondsLeft,
             initials: userIn
           };
-        newScores.push(newUser);
-        window.localStorage.setItem("newScores", JSON.stringify(newScores));
+        finalScore.push(newUser);
+        JSON.parse(window.localStorage.getItem("finalScore")) || [];
+        window.localStorage.setItem("finalScore", JSON.stringify(finalScore));
         window.location.href = "./scoreBoard.html";   
         };
 };
