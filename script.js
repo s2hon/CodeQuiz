@@ -84,7 +84,6 @@ function startTimer (event) {
         time.textContent = secondsLeft;
         if (secondsLeft <= 0) {
             // quiz finish
-            finalScore=secondsLeft;
             clearInterval(clock);
             time.textContent = "Time's Up!";
             window.location.href = "./scoreBoard.html";
@@ -165,7 +164,6 @@ function recordScores() {
     var name = document.getElementById ("userName").value;
     var userIn = name.trim();
     var scores =  JSON.parse(window.localStorage.getItem("finalScore")) || []
-    
     if (userIn !== ""){
         var newUser = {
             score: secondsLeft,
@@ -175,6 +173,7 @@ function recordScores() {
         window.localStorage.setItem("finalScore", JSON.stringify(scores));
         window.location.href = "./scoreBoard.html";   
         };
+}
 
 
     
