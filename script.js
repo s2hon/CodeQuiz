@@ -71,7 +71,6 @@ var userInfo = document.getElementById ("userInfo");
 //input
 var currentSeconds = parseInt(time.textContent);
 var correctAnswer = queSet[thisRoundIndex].correctAnswer;
-var finalScore = [];
 
 
 //event listeners
@@ -165,17 +164,17 @@ function donePage() {
 function recordScores() {
     var name = document.getElementById ("userName").value;
     var userIn = name.trim();
+    var scores =  JSON.parse(window.localStorage.getItem("finalScore")) || []
+    
     if (userIn !== ""){
         var newUser = {
             score: secondsLeft,
             initials: userIn
           };
-        finalScore.push(newUser);
-        JSON.parse(window.localStorage.getItem("finalScore")) || [];
-        window.localStorage.setItem("finalScore", JSON.stringify(finalScore));
+        scores.push(newUser);
+        window.localStorage.setItem("finalScore", JSON.stringify(scores));
         window.location.href = "./scoreBoard.html";   
         };
-};
 
 
     
